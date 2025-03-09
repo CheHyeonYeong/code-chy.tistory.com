@@ -1,0 +1,34 @@
+name: Update Blog Posts and Push to GitHub
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # 매일 자정 실행
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  update-blog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install feedparser beautifulsoup4 requests
+
+      - name: Run update script
+        run: python updateReadMeAuto.py  # 블로그 크롤링 및 파일 저장
+
+      - name: Commit and push if new posts added
+        run: |
+          git config --local user.email "gusdudco6@naver.com"
+          git config --local user.name "CheHyeonYeong"
+          git add posts/
+          git commit -m "Auto-update: New blog posts added" || echo "No changes to commit"
+          git push
