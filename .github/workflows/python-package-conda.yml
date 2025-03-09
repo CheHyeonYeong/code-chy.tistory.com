@@ -2,7 +2,7 @@ name: Update Blog Posts and Push to GitHub
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # 매일 자정 (UTC 기준) 실행
+    - cron: "0 0 * * *"  # 매일 자정 실행
   workflow_dispatch:  # 수동 실행 가능
 
 jobs:
@@ -18,7 +18,9 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install feedparser beautifulsoup4 requests
+        run: |
+          pip install --upgrade pip
+          pip install feedparser beautifulsoup4 requests
 
       - name: Run update script
         run: python updateReadMeAuto.py  # 블로그 크롤링 및 파일 저장
