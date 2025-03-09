@@ -1,0 +1,1016 @@
+# [project] 굿즈 마켓 플레이스 기획 - 4차
+
+📅 2025-03-06
+
+[원문 링크](https://code-chy.tistory.com/195)
+
+---
+
+<div class="area_view" id="article-view">
+ <!-- System - START -->
+ <div class="revenue_unit_wrap">
+  <div class="revenue_unit_item adfit">
+   <div class="revenue_unit_info">
+    728x90
+   </div>
+   <ins class="kakao_ad_area" data-ad-height="90px" data-ad-unit="DAN-nP21vcNIK4cPjSVz" data-ad-width="728px" style="display: none;">
+   </ins>
+   <script async="async" src="//t1.daumcdn.net/kas/static/ba.min.js" type="text/javascript">
+   </script>
+  </div>
+ </div>
+ <!-- System - END -->
+ <div class="contents_style">
+  <h2 data-ke-size="size26">
+   <span>
+    📝 [Project]
+   </span>
+   <span>
+    MSA, TDD, 요구사항 및 DB 설계 정리
+   </span>
+  </h2>
+  <p data-ke-size="size16">
+   <span style="background-color: #ffffff; color: #333333; text-align: start;">
+    📅
+    <span>
+    </span>
+   </span>
+   <b>
+    회의 날짜
+   </b>
+   <span style="background-color: #ffffff; color: #333333; text-align: start;">
+    : 2025. 2. 28.
+   </span>
+  </p>
+  <h2 data-ke-size="size26" style="background-color: #ffffff; color: #000000; text-align: start;">
+   🔥 최근 프로젝트 진행 상황
+  </h2>
+  <p data-ke-size="size16">
+   <span>
+    최근 사이드 프로젝트 회의를 통해 데이터베이스 설계를 정리하고 피드백을 반영했습니다. 이번 회의에서는 DB 스키마 개선, 오탈자 수정, 엔티티 설계 최적화 등의 작업을 진행했습니다.
+   </span>
+  </p>
+  <h4 data-ke-size="size20">
+   <span>
+    ✅ 주요 피드백
+   </span>
+  </h4>
+  <ol data-ke-list-type="decimal" data-spread="true" style="list-style-type: decimal;">
+   <li>
+    <span>
+     <b>
+      오탈자 수정
+     </b>
+    </span>
+    <ul data-ke-list-type="disc" data-spread="false" style="list-style-type: disc;">
+     <li>
+      <span>
+       comission
+      </span>
+      <span>
+       →
+      </span>
+      <span>
+       commission
+      </span>
+     </li>
+     <li>
+      <span>
+       contry_code
+      </span>
+      <span>
+       →
+      </span>
+      <span>
+       country_code
+      </span>
+     </li>
+     <li>
+      <span>
+       chatter_id
+      </span>
+      <span>
+       →
+      </span>
+      <span>
+       user_id
+      </span>
+     </li>
+     <li>
+      <span>
+       is_active
+      </span>
+      <span>
+       ,
+      </span>
+      <span>
+       is_auth
+      </span>
+      <span>
+       →
+      </span>
+      <span>
+       tinyint(1)
+      </span>
+      <span>
+       사용
+      </span>
+     </li>
+     <li>
+      <span>
+       password
+      </span>
+      <span>
+       →
+      </span>
+      <span>
+       hashed_password
+      </span>
+      <span>
+       로 변경
+      </span>
+     </li>
+     <li>
+      <span>
+       chat_message
+      </span>
+      <span>
+       테이블의
+      </span>
+      <span>
+       chat_order
+      </span>
+      <span>
+       제거 (생성 시간
+      </span>
+      <span>
+       created_at
+      </span>
+      <span>
+       활용)
+      </span>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <span>
+     <b>
+      파일 관리 방식 개선
+     </b>
+    </span>
+    <ul data-ke-list-type="disc" data-spread="false" style="list-style-type: disc;">
+     <li>
+      <span>
+       fileId
+      </span>
+      <span>
+       ,
+      </span>
+      <span>
+       fileType
+      </span>
+      <span>
+       을
+      </span>
+      <span>
+       resource
+      </span>
+      <span>
+       테이블로 통합하여 관리
+      </span>
+     </li>
+     <li>
+      <span>
+       커미션 견본, 배너 이미지 등의 리소스를 효율적으로 관리하기 위한 구조 고려
+      </span>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <span>
+     <b>
+      의뢰 요청 및 결제 프로세스 개선
+     </b>
+    </span>
+    <ul data-ke-list-type="disc" data-spread="false" style="list-style-type: disc;">
+     <li>
+      <span>
+       Spring Batch를 활용하여
+      </span>
+      <span>
+       commission
+      </span>
+      <span>
+       진행 단계 관리
+      </span>
+     </li>
+     <li>
+      <span>
+       의뢰 요청 → 결제 요청 → 결제 완료 → 작업 시작 → 작업 완료 및 전달 → 결제 금액 정산 → 후기 작성
+      </span>
+      <span>
+       순서로 흐름 정리
+      </span>
+     </li>
+     <li>
+      <span>
+       신고 기능 추가
+      </span>
+     </li>
+     <li>
+      <span>
+       에스크로 결제 시스템 도입 검토
+      </span>
+     </li>
+    </ul>
+   </li>
+  </ol>
+  <h3 data-ke-size="size23">
+   <span>
+    🛠️ 주요 DB 테이블 설계
+   </span>
+  </h3>
+  <h4 data-ke-size="size20">
+   <span>
+    <b>
+     CommissionRequests (의뢰 요청)
+    </b>
+   </span>
+  </h4>
+  <p data-ke-size="size16">
+   ColumnTypeDescription
+  </p>
+  <table border="1" data-ke-align="alignLeft" style="border-collapse: collapse; width: 100%;">
+   <tbody>
+    <tr>
+     <td style="width: 22.6744%;">
+      <span>
+       requestId
+      </span>
+      <span>
+       (PK)
+      </span>
+     </td>
+     <td style="width: 48.9535%;">
+      <span>
+       UUID
+      </span>
+     </td>
+     <td style="width: 28.3721%;">
+      <span>
+       기본 키
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td style="width: 22.6744%;">
+      <span>
+       commissionId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td style="width: 48.9535%;">
+      <span>
+       UUID
+      </span>
+     </td>
+     <td style="width: 28.3721%;">
+      <span>
+       의뢰글 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td style="width: 22.6744%;">
+      <span>
+       requesterId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td style="width: 48.9535%;">
+      <span>
+       UUID
+      </span>
+     </td>
+     <td style="width: 28.3721%;">
+      <span>
+       요청자 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td style="width: 22.6744%;">
+      <span>
+       status
+      </span>
+     </td>
+     <td style="width: 48.9535%;">
+      <span>
+       ENUM('requested', 'in_progress', 'completed', 'cancelled')
+      </span>
+     </td>
+     <td style="width: 28.3721%;">
+      <span>
+       진행 상태
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td style="width: 22.6744%;">
+      <span>
+       createdAt
+      </span>
+     </td>
+     <td style="width: 48.9535%;">
+      <span>
+       TIMESTAMP
+      </span>
+     </td>
+     <td style="width: 28.3721%;">
+      <span>
+       요청일
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td style="width: 22.6744%;">
+      <span>
+       completeAt
+      </span>
+     </td>
+     <td style="width: 48.9535%;">
+      <span>
+       TIMESTAMP
+      </span>
+     </td>
+     <td style="width: 28.3721%;">
+      <span>
+       작업마감일
+      </span>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h4 data-ke-size="size20">
+   <span>
+    <b>
+     CommissionReviews (후기)
+    </b>
+   </span>
+  </h4>
+  <table border="1" data-ke-align="alignLeft" style="border-collapse: collapse; width: 100%;">
+   <tbody>
+    <tr>
+     <td>
+      <span>
+       Column
+      </span>
+     </td>
+     <td>
+      <span>
+       Type
+      </span>
+     </td>
+     <td>
+      <span>
+       Description
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reviewId
+      </span>
+      <span>
+       (PK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       기본 키
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       commissionId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       의뢰글 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reviewerId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       작성자 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       rating
+      </span>
+     </td>
+     <td>
+      <span>
+       INT
+      </span>
+     </td>
+     <td>
+      <span>
+       별점 (1~5)
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       comment
+      </span>
+     </td>
+     <td>
+      <span>
+       TEXT
+      </span>
+     </td>
+     <td>
+      <span>
+       후기 내용
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       createdAt
+      </span>
+     </td>
+     <td>
+      <span>
+       TIMESTAMP
+      </span>
+     </td>
+     <td>
+      <span>
+       작성일
+      </span>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h4 data-ke-size="size20">
+   <span>
+    <b>
+     CommissionReports (신고)
+    </b>
+   </span>
+  </h4>
+  <table border="1" data-ke-align="alignLeft" style="border-collapse: collapse; width: 100%;">
+   <tbody>
+    <tr>
+     <td>
+      <span>
+       Column
+      </span>
+     </td>
+     <td>
+      <span>
+       Type
+      </span>
+     </td>
+     <td>
+      <span>
+       Description
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reportId
+      </span>
+      <span>
+       (PK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       기본 키
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reportedBy
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       신고자 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reportingId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       의뢰글 혹은 메시지 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reason
+      </span>
+     </td>
+     <td>
+      <span>
+       TEXT
+      </span>
+     </td>
+     <td>
+      <span>
+       신고 사유
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       createdAt
+      </span>
+     </td>
+     <td>
+      <span>
+       TIMESTAMP
+      </span>
+     </td>
+     <td>
+      <span>
+       신고 날짜
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       reportType
+      </span>
+     </td>
+     <td>
+      <span>
+       ENUM('page', 'message')
+      </span>
+     </td>
+     <td>
+      <span>
+       신고 타입
+      </span>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h4 data-ke-size="size20">
+   <span>
+    <b>
+     Payments (결제 내역)
+    </b>
+   </span>
+  </h4>
+  <table border="1" data-ke-align="alignLeft" style="border-collapse: collapse; width: 100%;">
+   <tbody>
+    <tr>
+     <td>
+      <span>
+       Column
+      </span>
+     </td>
+     <td>
+      <span>
+       Type
+      </span>
+     </td>
+     <td>
+      <span>
+       Description
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       paymentId
+      </span>
+      <span>
+       (PK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       기본 키
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       commissionId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       의뢰 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       payerId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       UUID
+      </span>
+     </td>
+     <td>
+      <span>
+       결제자 ID
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       amount
+      </span>
+     </td>
+     <td>
+      <span>
+       DECIMAL(10,2)
+      </span>
+     </td>
+     <td>
+      <span>
+       결제 금액
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       statusId
+      </span>
+      <span>
+       (FK)
+      </span>
+     </td>
+     <td>
+      <span>
+       INT
+      </span>
+     </td>
+     <td>
+      <span>
+       PaymentStatus FK
+      </span>
+     </td>
+    </tr>
+    <tr>
+     <td>
+      <span>
+       createdAt
+      </span>
+     </td>
+     <td>
+      <span>
+       TIMESTAMP
+      </span>
+     </td>
+     <td>
+      <span>
+       결제 날짜
+      </span>
+     </td>
+    </tr>
+   </tbody>
+  </table>
+  <h3 data-ke-size="size23">
+   <span>
+    🚀 기술적 고민
+   </span>
+  </h3>
+  <h4 data-ke-size="size20">
+   <span>
+    ✅ DTO를 활용하는 이유
+   </span>
+  </h4>
+  <ol data-ke-list-type="decimal" data-spread="false" style="list-style-type: decimal;">
+   <li>
+    <span>
+     DB 엔티티를 그대로 노출하지 않도록 보호
+    </span>
+   </li>
+   <li>
+    <span>
+     API 통신 중 구조 변경에 유연하게 대응
+    </span>
+   </li>
+   <li>
+    <span>
+     Builder 패턴을 활용하여 필요한 데이터만 전송 가능
+    </span>
+   </li>
+  </ol>
+  <h4 data-ke-size="size20">
+   <span>
+    ✅ API 서버 &amp; 컨트롤러 서버 분리
+   </span>
+  </h4>
+  <ul data-ke-list-type="disc" data-spread="false" style="list-style-type: disc;">
+   <li>
+    <span>
+     API 서버 → 비즈니스 로직 담당
+    </span>
+   </li>
+   <li>
+    <span>
+     컨트롤러 서버 → 클라이언트(Web, Mobile)와 직접 소통
+    </span>
+   </li>
+  </ul>
+  <h4 data-ke-size="size20">
+   <span>
+    ✅ 공통 기능 라이브러리화
+   </span>
+  </h4>
+  <ul data-ke-list-type="disc" data-spread="false" style="list-style-type: disc;">
+   <li>
+    <span>
+     OAuth 2.0 / JWT 인증 모듈화
+    </span>
+   </li>
+   <li>
+    <span>
+     AOP 기반 로깅 및 예외 처리 적용
+    </span>
+   </li>
+   <li>
+    <span>
+     공통 결제 처리 모듈 구축
+    </span>
+   </li>
+  </ul>
+  <h3 data-ke-size="size23">
+   <span>
+    📌 다음 회의 (2025.03.07 17:30)
+   </span>
+  </h3>
+  <ol data-ke-list-type="decimal" data-spread="false" style="list-style-type: decimal;">
+   <li>
+    <span>
+     API 명세서 작성
+    </span>
+   </li>
+   <li>
+    <span>
+     코드 컨벤션 정의
+    </span>
+   </li>
+   <li>
+    <span>
+     코드 리뷰
+    </span>
+   </li>
+   <li>
+    <span>
+     아키텍처 설계
+    </span>
+   </li>
+  </ol>
+  <p data-ke-size="size16">
+   <span>
+    이번 회의를 통해 프로젝트의 구조를 더욱 명확하게 다듬었으며, 다음 단계로 API 명세서 및 아키텍처 설계에 집중할 예정입니다. 앞으로의 과정도 차근차근 정리해가면서 진행할 계획입니다! 🚀
+   </span>
+  </p>
+ </div>
+ <!-- System - START -->
+ <!-- System - END -->
+ <script async="" crossorigin="anonymous" onerror="changeAdsenseToAdfit()" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9527582522912841">
+ </script>
+ <!-- inventory -->
+ <ins class="adsbygoogle" data-ad-adfit-unit="DAN-HCZEy0KQLPMGnGuC" data-ad-client="ca-pub-9527582522912841" data-ad-format="auto" data-ad-slot="4947159016" data-ad-type="inventory" data-full-width-responsive="true" style="margin:50px 0; display:block">
+ </ins>
+ <script id="adsense_script">
+  (adsbygoogle = window.adsbygoogle || []).push({});
+ </script>
+ <script>
+  if(window.ObserveAdsenseUnfilledState !== undefined){ ObserveAdsenseUnfilledState(); }
+ </script>
+ <div class="container_postbtn #post_button_group">
+  <div class="postbtn_like">
+   <script>
+    window.ReactionButtonType = 'reaction';
+window.ReactionApiUrl = '//code-chy.tistory.com/reaction';
+window.ReactionReqBody = {
+    entryId: 195
+}
+   </script>
+   <div class="wrap_btn" data-tistory-react-app="Reaction" id="reaction-195">
+   </div>
+   <div class="wrap_btn wrap_btn_share">
+    <button aria-expanded="false" class="btn_post sns_btn btn_share" data-blog-title="Cohe" data-description="📝 [Project]MSA, TDD, 요구사항 및 DB 설계 정리📅 회의 날짜: 2025. 2. 28.🔥 최근 프로젝트 진행 상황최근 사이드 프로젝트 회의를 통해 데이터베이스 설계를 정리하고 피드백을 반영했습니다. 이번 회의에서는 DB 스키마 개선, 오탈자 수정, 엔티티 설계 최적화 등의 작업을 진행했습니다.✅ 주요 피드백오탈자 수정comission → commissioncontry_code → country_codechatter_id → user_idis_active, is_auth → tinyint(1) 사용password → hashed_password로 변경chat_message 테이블의 chat_order 제거 (생성 시간 created_at 활용)파일 관리 방식 개선fileId, file.." data-pc-url="https://code-chy.tistory.com/195" data-profile-image="https://tistory1.daumcdn.net/tistory/5646409/attach/8bf562b73e38446a9f0bb065fc30f867" data-profile-name="코헤0121" data-relative-pc-url="/195" data-thumbnail-url="https://t1.daumcdn.net/tistory_admin/static/images/openGraph/opengraph.png" data-title="[project] 굿즈 마켓 플레이스 기획 - 4차" type="button">
+     <span class="ico_postbtn ico_share">
+      공유하기
+     </span>
+    </button>
+    <div class="layer_post" id="tistorySnsLayer">
+    </div>
+   </div>
+   <div class="wrap_btn wrap_btn_etc" data-category-visibility="public" data-entry-id="195" data-entry-visibility="public">
+    <button aria-expanded="false" class="btn_post btn_etc2" type="button">
+     <span class="ico_postbtn ico_etc">
+      게시글 관리
+     </span>
+    </button>
+    <div class="layer_post" id="tistoryEtcLayer">
+    </div>
+   </div>
+  </div>
+  <button class="btn_menu_toolbar btn_subscription #subscribe" data-blog-id="5646409" data-device="web_pc" data-tiara-action-name="구독 버튼_클릭" data-url="https://code-chy.tistory.com/195" type="button">
+   <em class="txt_state">
+   </em>
+   <strong class="txt_tool_id">
+    Cohe
+   </strong>
+   <span class="img_common_tistory ico_check_type1">
+   </span>
+  </button>
+  <div class="postbtn_ccl" data-ccl-derive="1" data-ccl-type="6">
+   <a class="link_ccl" href="https://creativecommons.org/licenses/by-nc/4.0/deed.ko" rel="license" target="_blank">
+    <span class="bundle_ccl">
+     <span class="ico_postbtn ico_ccl1">
+      저작자표시
+     </span>
+     <span class="ico_postbtn ico_ccl2">
+      비영리
+     </span>
+    </span>
+   </a>
+  </div>
+  <!--
+            <rdf:RDF xmlns="https://web.resource.org/cc/" xmlns:dc="https://purl.org/dc/elements/1.1/" xmlns:rdf="https://www.w3.org/1999/02/22-rdf-syntax-ns#">
+                <Work rdf:about="">
+                    <license rdf:resource="https://creativecommons.org/licenses/by-nc/4.0/deed.ko" />
+                </Work>
+                <License rdf:about="https://creativecommons.org/licenses/by-nc/4.0/deed.ko">
+                    <permits rdf:resource="https://web.resource.org/cc/Reproduction"/>
+                    <permits rdf:resource="https://web.resource.org/cc/Distribution"/>
+                    <requires rdf:resource="https://web.resource.org/cc/Notice"/>
+                    <requires rdf:resource="https://web.resource.org/cc/Attribution"/>
+                    <permits rdf:resource="https://web.resource.org/cc/DerivativeWorks"/>
+<prohibits rdf:resource="https://web.resource.org/cc/CommercialUse"/>
+
+                </License>
+            </rdf:RDF>
+            -->
+  <div data-tistory-react-app="SupportButton">
+  </div>
+ </div>
+ <!-- PostListinCategory - START -->
+ <div class="another_category another_category_color_gray">
+  <h4>
+   '
+   <a href="/category/%EC%82%AC%EC%9D%B4%EB%93%9C%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9D%B4%EB%AA%A8%EC%A0%80%EB%AA%A8">
+    사이드 프로젝트 이모저모
+   </a>
+   &gt;
+   <a href="/category/%EC%82%AC%EC%9D%B4%EB%93%9C%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%9D%B4%EB%AA%A8%EC%A0%80%EB%AA%A8/%EA%B5%BF%EC%A6%88%20%EB%A7%88%EC%BC%93%ED%94%8C%EB%A0%88%EC%9D%B4%EC%8A%A4%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8">
+    굿즈 마켓플레이스 프로젝트
+   </a>
+   ' 카테고리의 다른 글
+  </h4>
+  <table>
+   <tr>
+    <th>
+     <a href="/190">
+      [project] 굿즈 마켓 플레이스 기획 - 3차
+     </a>
+     <span>
+      (1)
+     </span>
+    </th>
+    <td>
+     2025.02.24
+    </td>
+   </tr>
+   <tr>
+    <th>
+     <a href="/189">
+      [project] 굿즈 마켓 플레이스 기획 - 2차
+     </a>
+     <span>
+      (1)
+     </span>
+    </th>
+    <td>
+     2025.02.20
+    </td>
+   </tr>
+   <tr>
+    <th>
+     <a href="/188">
+      [project] 굿즈 마켓 플레이스 기획 - 1차
+     </a>
+     <span>
+      (0)
+     </span>
+    </th>
+    <td>
+     2025.02.18
+    </td>
+   </tr>
+  </table>
+ </div>
+ <!-- PostListinCategory - END -->
+</div>
