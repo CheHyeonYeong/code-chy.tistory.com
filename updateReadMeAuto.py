@@ -1,31 +1,30 @@
 import feedparser
-import os
 
-# RSS 피드 가져오기
-rss_url = "https://code-chy.tistory.com/rss"
-rss = feedparser.parse(rss_url)
+def get_all_posts():
+    all_posts = []
+    page = 1
 
-# README.md 파일 읽기
-readme_path = "README.md"
-with open(readme_path, "r", encoding="utf-8") as f:
-    content = f.read()
+    while True:
+        # Tistory의 RSS는 기본적으로 30개까지만 가져올 수 있으므로, page를 추가해서 요청
+        rss_url = f"https://code-chy.tistory.com/rss?page={30}"
+        rss = feedparser.parse(rss_url)
 
-# RSS 데이터 활용하여 새로운 포스트 추가
-post = ""
-for feed in rss['entries']:
-    date = f"{feed.published_parsed.tm_year}.{feed.published_parsed.tm_mon}.{feed.published_parsed.tm_mday}"
-    check = f"{date} : {feed.title}"
-    
-    # 이미 추가된 포스트인지 확인
-    if check not in content:
-        post += f"[{date} : {feed.title}]({feed.link}) <br>\n"
+        if not rss.entries:  # 더 이상 가져올 데이터가 없으면 종료
+            break
 
-# README.md 파일 갱신
-if post:
-    with open(readme_path, "a", encoding="utf-8") as f:
-        f.write(post)
+        for entry in rss.entries:
+            post_data = {
+                "title": entry.title,
+                "link": entry.link,
+                "date": f"{entry.published_parsed.tm_year}.{entry.published_parsed.tm_mon}.{entry.published_parsed.tm_mday}"
+            }
+            all_posts.append(post_data)
 
-    # GitHub에 자동 푸시
-    os.system("git add README.md")
-    os.system('git commit -m "Update README.md with latest blog posts"')
-    os.system("git push origin main")  # 브랜치 이름이 다르면 'main'을 변경해야 함
+        page += 1  # 다음 페이지로 이동
+
+    return all_posts
+
+# 모든 포스트 출력
+all_blog_posts = get_all_posts()
+for post in all_blog_posts:
+    print(f"{post['date']} - {post['title']} ({post['link']})")
